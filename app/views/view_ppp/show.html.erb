@@ -1,0 +1,26 @@
+<%= stylesheet_link_tag 'view_ppp.css', :plugin => 'redmine_view_ppp' %>
+<% if @director || @group_manager %>
+<p>
+  <label for="user_id">Пользователь</label>
+  <%= select_tag 'user_id', options_from_collection_for_select(@group_users, 'id', 'name', @current_user_id), onChange: "window.location = '/view_ppp/'+this.value;" %>
+</p>
+<% end %>
+
+<div id="ppp_issues">
+<%= form_tag({}) do -%>
+<h2>Персональный производственный план</h2>
+<% if @issues1 && @issues1.size > 0 -%>
+<%= render :partial => 'view_ppp/table1', :locals => {:issues => @issues1, :query => @query} %>
+<br/><br/>
+<% end -%>
+<% if @issues2 && @issues2.size > 0 -%>
+<%= render :partial => 'view_ppp/table2', :locals => {:issues => @issues2, :query => @query} %>
+<br/><br/>
+<% end -%>
+<% if @issues3 && @issues3.size > 0 -%>
+<%= render :partial => 'view_ppp/table3', :locals => {:issues => @issues3, :query => @query} %>
+<br/><br/>
+<% end -%>
+<%= context_menu issues_context_menu_path %>
+<% end %>
+</div>

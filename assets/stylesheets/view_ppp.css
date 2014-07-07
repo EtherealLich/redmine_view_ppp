@@ -1,0 +1,10 @@
+tr.this_week {background-color:#aef3aa;}
+tr.immediate {background-color:#f3aeaa;}
+tr.overdue {font-weight:bold;}
+
+tr.issue td.estimated_date { text-align: left; }
+
+pre-wrap
+
+div#ppp_issues .related-issues { margin-bottom: 1em; }
+div#ppp_issues .related-issues td.checkbox { display: none; }

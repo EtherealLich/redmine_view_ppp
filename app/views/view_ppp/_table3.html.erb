@@ -1,0 +1,33 @@
+<h3>Список непроизводственных заданий (<%= issues.size -%>)</h3>
+<table class="list related-issues">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Проект</th>
+            <th>Трекер</th>
+			<th>Статус</th>
+			<th>Тема</th>
+			<th>Дата выполнения</th>
+			<th>Общая оценка времени</th>
+			<th>Затраченное время</th>
+			<th>Затрачено времени всего</th>
+		</tr>
+    </thead>
+    <tbody>
+	  <% reset_cycle %>
+      <% issues.each do |issue| -%>
+		<tr class="issue <%= issue.css_class %> <%= cycle('odd', 'even') %> hascontextmenu">
+			<td class="checkbox"><%= check_box_tag 'ids[]', issue.id, false, :id => nil %></td>
+			<td class="id"><a href="<%= issue_path(issue) %>" target="_blank"><%= issue.id %></a></td>
+			<td class="subject"><a href="<%= project_path(issue.project) %>" target="_blank"><%= issue.project.name %></a></td>
+            <td class="tracker"><%= issue.tracker.name %></td>
+			<td class="status"><%= issue.status.name %></td>
+			<td class="subject"><a href="<%= issue_path(issue) %>" target="_blank"><%= issue.subject %></a></td>
+			<td><%= format_date(issue.due_date) %></td>
+			<td><%= (issue.estimated_hours_user ? issue.estimated_hours_user.round(2) : '') %></td>
+			<td><%= (issue.spent_hours_user ? issue.spent_hours_user.round(2) : '') %></td>
+			<td><%= (issue.total_spent_hours ? issue.total_spent_hours.round(2) : '') %></td>
+		</tr>
+      <% end -%>
+	</tbody>
+</table>
